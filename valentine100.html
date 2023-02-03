@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Valentine Generator</title>
+	<style>
+        /*CSS styling*/
+		body {
+            background-color: rgb(255, 161, 216);
+            font-family: "Lucida Console", Helvetica, sans-serif; color: rgb(12, 29, 126);
+			padding: 10px 0;
+			border: 5px dotted rgb(255, 49, 49);
+			
+			text-align: center;
+		}
+        header{
+            font-family: "Broadley"; color: rgb(255, 0, 0);
+        }
+        .div1{
+            margin-left: 1px;
+            margin-right: 1px;
+            padding:1px;
+            background-color: rgb(168, 249, 255);
+            border: 1px;
+            border-style:double;
+            border-color: rgb(255, 0, 119);
+        }
+        
+	</style>
+    <header>
+        <h1>Valentine Generator</h1>
+        <br>
+      </header>
+    
+	<script>
+        //Global Vars
+        var customName = ""
+        var customList = []
+        let inputAdjectives = ["nice", "funny", "sweet", "kind", "thoughtful", "jolly", "exceptional", "smart", "emphatic", "fun", "hilarious", "cool"];
+        //retrieved from movietrivia.html at 1:41 PM on 1/26/23
+        function randomInt(min, max) 
+        {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        //generates random adjectives using a while loop that randomly pushes adjectives from inputAdjectives
+        function generateRandomAdjectiveList(numAdjsRequested, inputAdjectives)
+        {
+            let tempAdjectives = [];
+            while(tempAdjectives.length < numAdjsRequested) {
+            let randomIndex = randomInt(0, inputAdjectives.length - 1);
+            let adjective = inputAdjectives[randomIndex];
+            if(!tempAdjectives.includes(adjective)) 
+            {
+                tempAdjectives.push(adjective);
+            }
+            
+        }
+        return tempAdjectives;
+            
+        }
+        // function to format list of adjectives
+        function formatList(tempAdjectives) 
+        {
+            let output = "";
+            for(let i = 0; i < tempAdjectives.length; i++) 
+            {
+                output += tempAdjectives[i] + " ";
+            }
+            return output;
+        }
+         // function to compose valentine letter
+        function composeValentine(name, inputAdjectives) 
+        {
+            let friendStatus = "";
+            if(inputAdjectives.length > 5) 
+            {
+                let randomIndex = randomInt(0, inputAdjectives.length - 1);
+                inputAdjectives[randomIndex] = "❤️❤️❤️";
+                friendStatus = "best";
+            } 
+            else 
+            {
+                friendStatus = "nice";
+            }
+            let letter = "Dear " + name + ", Happy Valentine's Day! Here's a list of qualities I admire about you: " + tempAdjectives + ". You are my " + friendStatus + " friend. Love and hugs, Josh";
+            return letter;
+        }
+         // function to get valentine letter
+        function getValentine() 
+        {
+            let name = idSelectBox.value
+            if(name == "Suzy")
+            {
+               tempAdjectives = generateRandomAdjectiveList(4, inputAdjectives)
+            }
+            else if(name == "Sanjay")
+            {
+                tempAdjectives = generateRandomAdjectiveList(2, inputAdjectives)
+            }
+            else if(name == "Nick")
+            {
+                tempAdjectives = generateRandomAdjectiveList(8, inputAdjectives)
+            }
+            else if(name == "Custom")
+            {
+                tempAdjectives = generateRandomAdjectiveList(8, customList)
+            }
+            
+            idDivLetter.innerHTML = composeValentine(name, tempAdjectives)
+        }
+        function saveName()
+        {
+            customName = nameId.value
+            idCustomNameContainer.innerHTML += customName
+
+        }
+        function saveAdjective()
+        {
+            var customAdj = idAdjective.value
+            customList.push(customAdj)
+            formatList(customList)
+            idCustomItemContainer.innerHTML += customAdj
+        }
+        function toggleCustom()
+        {
+            idDivValentine.innerHTML = ""
+            var customString = "Name:<input type='text' id ='nameId' placeholder='Name'><br> <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'saveName()'<br> <span id = 'idCustomNameContainer'><br> Item<input type='text' id ='idItem' placeholder='Item'><br></span>"
+        }
+                
+	</script>
+</head>
+<body>
+    <!--https://www.istockphoto.com/vector/happy-valentines-day-banner-holiday-background-design-with-big-heart-made-of-pink-gm1196771295-341492114-->
+    <img src="valentine.jpg" width="245" height="200">
+    <h2>Suzy</h2><h3>gets a valentine with 4 random adjectives</h3><br>
+    <h2>Sanjay</h2><h3>gets a valentine with 2 random adjectives</h3><br>
+    <h2>Nick</h2><h3>gets a valentine with 8 random adjectives</h3><br>
+    <h3>You can also generate a random valentine of your own, and if you use more than 8 adjectives, your friend will be classified as your BEST friend, and one of their adjectives will be replaced with emoji hearts</h2>
+    <br>
+    Name:<input type="text" id ="nameId" placeholder="Name">
+    <br>
+    Adjective:<input type="text" id ="idAdjective" placeholder="Adjective">
+    <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'saveName()'
+    <br>
+    Select a Person!:
+    <select id="idSelectBox">
+        <option id="suzyId">Suzy</option>
+        <option id="sanjayId">Sanjay</option>
+        <option id="nickId">Nick</option>
+        <option id="custom">Custom</option>
+    </select>
+    <br>
+    <div id="idButtonContainer"> <input type="button" value="Create Valentine" onclick="getValentine()"></div>
+    <br>
+    <span id = “idCustomNameContainer”></span>
+    <div id="idDivCustomInput"></div>
+    <div id="idDivLetter"></div>
+</body>
+</html>
