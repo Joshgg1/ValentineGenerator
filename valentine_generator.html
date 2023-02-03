@@ -101,30 +101,8 @@
             {
                 tempAdjectives = generateRandomAdjectiveList(8, inputAdjectives)
             }
-            else if(name == "Custom")
-            {
-                tempAdjectives = generateRandomAdjectiveList(8, customList)
-            }
             
             idDivLetter.innerHTML = composeValentine(name, tempAdjectives)
-        }
-        function saveName()
-        {
-            customName = nameId.value
-            idCustomNameContainer.innerHTML += customName
-
-        }
-        function saveAdjective()
-        {
-            var customAdj = idAdjective.value
-            customList.push(customAdj)
-            formatList(customList)
-            idCustomItemContainer.innerHTML += customAdj
-        }
-        function toggleCustom()
-        {
-            idDivValentine.innerHTML = ""
-            var customString = "Name:<input type='text' id ='nameId' placeholder='Name'><br> <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'saveName()'<br> <span id = 'idCustomNameContainer'><br> Item<input type='text' id ='idItem' placeholder='Item'><br></span>"
         }
                 
 	</script>
@@ -136,24 +114,16 @@
     <h2>Sanjay</h2><h3>gets a valentine with 2 random adjectives</h3><br>
     <h2>Nick</h2><h3>gets a valentine with 8 random adjectives</h3><br>
     <h3>You can also generate a random valentine of your own, and if you use more than 8 adjectives, your friend will be classified as your BEST friend, and one of their adjectives will be replaced with emoji hearts</h2>
-    <br>
-    Name:<input type="text" id ="nameId" placeholder="Name">
-    <br>
-    Adjective:<input type="text" id ="idAdjective" placeholder="Adjective">
-    <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'saveName()'
-    <br>
+    <br><br>
     Select a Person!:
     <select id="idSelectBox">
         <option id="suzyId">Suzy</option>
         <option id="sanjayId">Sanjay</option>
         <option id="nickId">Nick</option>
-        <option id="custom">Custom</option>
     </select>
     <br>
     <div id="idButtonContainer"> <input type="button" value="Create Valentine" onclick="getValentine()"></div>
     <br>
-    <span id = “idCustomNameContainer”></span>
-    <div id="idDivCustomInput"></div>
     <div id="idDivLetter"></div>
 </body>
 </html>
