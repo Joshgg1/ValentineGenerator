@@ -33,6 +33,7 @@
       </header>
     
 	<script>
+        //Global Vars
         var customName = ""
         var customList = []
         let inputAdjectives = ["nice", "funny", "sweet", "kind", "thoughtful", "jolly", "exceptional", "smart", "emphatic", "fun", "hilarious", "cool"];
@@ -41,6 +42,7 @@
         {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
+        //generates random adjectives using a while loop that randomly pushes adjectives from inputAdjectives
         function generateRandomAdjectiveList(numAdjsRequested, inputAdjectives)
         {
             let tempAdjectives = [];
@@ -51,9 +53,9 @@
             {
                 tempAdjectives.push(adjective);
             }
-            return tempAdjectives;
+            
         }
-        
+        return tempAdjectives;
             
         }
         // function to format list of adjectives
@@ -99,8 +101,22 @@
             {
                 tempAdjectives = generateRandomAdjectiveList(8, inputAdjectives)
             }
+            else if(name == "Custom")
+            {
+                tempAdjectives = generateRandomAdjectiveList(8, customList)
+            }
             
             idDivLetter.innerHTML = composeValentine(name, tempAdjectives)
+        }
+        function saveName()
+        {
+            customName = nameId.value
+            idCustomNameContainer.innerHTML = customName
+
+        }
+        function saveAdjective()
+        {
+            
         }
                 
 	</script>
@@ -112,16 +128,21 @@
     <h2>Sanjay</h2><h3>gets a valentine with 2 random adjectives</h3><br>
     <h2>Nick</h2><h3>gets a valentine with 8 random adjectives</h3><br>
     <h3>You can also generate a random valentine of your own, and if you use more than 8 adjectives, your friend will be classified as your BEST friend, and one of their adjectives will be replaced with emoji hearts</h2>
-    <br><br>
+    <br>
+    <input type="text" id ="nameId" placeholder="Name">
+    <br>
     Select a Person!:
     <select id="idSelectBox">
         <option id="suzyId">Suzy</option>
         <option id="sanjayId">Sanjay</option>
         <option id="nickId">Nick</option>
+        <option id="custom">Custom</option>
     </select>
     <br>
     <div id="idButtonContainer"> <input type="button" value="Create Valentine" onclick="getValentine()"></div>
     <br>
+    <span id = “idCustomNameContainer”></span>
+    <div id="idDivCustomInput"></div>
     <div id="idDivLetter"></div>
 </body>
 </html>
