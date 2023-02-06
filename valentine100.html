@@ -54,8 +54,8 @@
                 tempAdjectives.push(adjective);
             }
             
-        }
-        return tempAdjectives;
+            }
+            return tempAdjectives;
             
         }
         // function to format list of adjectives
@@ -103,28 +103,37 @@
             }
             else if(name == "Custom")
             {
-                tempAdjectives = generateRandomAdjectiveList(8, customList)
+                tempAdjectives = composeValentine(name, customList)
             }
             
             idDivLetter.innerHTML = composeValentine(name, tempAdjectives)
         }
-        function saveName()
+        function saveName() 
         {
-            customName = nameId.value
-            idCustomNameContainer.innerHTML += customName
-
+            customName = document.getElementById("idName").value;
+            idCustomNameContainer.innerHTML += customName;
         }
-        function saveAdjective()
+        function saveAdjective() 
         {
-            var customAdj = idAdjective.value
-            customList.push(customAdj)
-            formatList(customList)
-            idCustomItemContainer.innerHTML += customAdj
+            var customAdjective = document.getElementById("idAdjective").value;
+            customList.push(customAdjective);
+            var formattedList = formatList(customList);
+            document.getElementById("idCustomItemContainer").innerHTML = formattedList;
         }
         function toggleCustom()
         {
-            idDivValentine.innerHTML = ""
-            var customString = "Name:<input type='text' id ='nameId' placeholder='Name'><br> <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'saveName()'<br> <span id = 'idCustomNameContainer'><br> Item<input type='text' id ='idItem' placeholder='Item'><br></span>"
+            idDivLetter.innerHTML = ""
+            var customString = "<input type='text' id='idName' placeholder='Enter custom name'> <button id='idCustomNameButton' onclick='saveName()'>Save Name</button> <span id='idCustomNameContainer'></span> <br><br> <input type='text' id='idAdjective' placeholder='Enter custom adjective'> <button id='idCustomItemButton' onclick='saveAdjective()'>Save Adjective</button> <span id='idCustomItemContainer'></span>"
+            var selection = document.getElementById("idSelectBox").value;
+            if (selection === "Custom") 
+            {
+                document.getElementById("idDivCustomInput").innerHTML = customString;
+            } 
+            else 
+            {
+                document.getElementById("idDivCustomInput").innerHTML = "";
+            }
+
         }
                 
 	</script>
@@ -136,12 +145,10 @@
     <h2>Sanjay</h2><h3>gets a valentine with 2 random adjectives</h3><br>
     <h2>Nick</h2><h3>gets a valentine with 8 random adjectives</h3><br>
     <h3>You can also generate a random valentine of your own, and if you use more than 8 adjectives, your friend will be classified as your BEST friend, and one of their adjectives will be replaced with emoji hearts</h2>
-    <br>
-    Name:<input type="text" id ="nameId" placeholder="Name">
-    <br>
-    Adjective:<input type="text" id ="idAdjective" placeholder="Adjective">
-    <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'saveName()'
-    <br>
+    <br><br>
+    <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'toggleCustom()'>
+    
+    <br><br>
     Select a Person!:
     <select id="idSelectBox">
         <option id="suzyId">Suzy</option>
@@ -149,10 +156,12 @@
         <option id="nickId">Nick</option>
         <option id="custom">Custom</option>
     </select>
-    <br>
+    <br><br>
     <div id="idButtonContainer"> <input type="button" value="Create Valentine" onclick="getValentine()"></div>
-    <br>
-    <span id = “idCustomNameContainer”></span>
+    <br><br>
+    <div id="idCustomNameContainer"></div>
+
+    <div id="idCustomItemContainer"></div>
     <div id="idDivCustomInput"></div>
     <div id="idDivLetter"></div>
 </body>
