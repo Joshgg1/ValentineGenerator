@@ -71,6 +71,7 @@
          // function to compose valentine letter
         function composeValentine(name, inputAdjectives) 
         {
+            let letter = ""
             let friendStatus = "";
             if(inputAdjectives.length > 5) 
             {
@@ -82,7 +83,17 @@
             {
                 friendStatus = "nice";
             }
-            let letter = "Dear " + name + ", Happy Valentine's Day! Here's a list of qualities I admire about you: " + tempAdjectives + ". You are my " + friendStatus + " friend. Love and hugs, Josh";
+            if(name == "Suzy"||"Nick"||"Sanjay")
+            {
+                
+                letter = "Dear " + name + ", Happy Valentine's Day! Here's a list of qualities I admire about you: " + inputAdjectives + ". You are my " + friendStatus + " friend. Love and hugs, Josh";
+            }
+            else if(name == "Custom")
+            {
+                
+                letter = "Dear " + customName + ", Happy Valentine's Day! Here's a list of qualities I admire about you: " + customList + ". You are my " + friendStatus + " friend. Love and hugs, Josh";
+            }
+            
             return letter;
         }
          // function to get valentine letter
@@ -103,7 +114,7 @@
             }
             else if(name == "Custom")
             {
-                tempAdjectives = composeValentine(name, customList)
+                tempAdjectives = composeValentine(customName, customList)
             }
             
             idDivLetter.innerHTML = composeValentine(name, tempAdjectives)
@@ -146,7 +157,7 @@
     <h2>Nick</h2><h3>gets a valentine with 8 random adjectives</h3><br>
     <h3>You can also generate a random valentine of your own, and if you use more than 8 adjectives, your friend will be classified as your BEST friend, and one of their adjectives will be replaced with emoji hearts</h2>
     <br><br>
-    <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'toggleCustom()'>
+    
     
     <br><br>
     Select a Person!:
@@ -159,6 +170,8 @@
     <br><br>
     <div id="idButtonContainer"> <input type="button" value="Create Valentine" onclick="getValentine()"></div>
     <br><br>
+    <input type='button' value='Custom Button' id = 'idCustomNameButton' onclick = 'toggleCustom()'>
+    <br>
     <div id="idCustomNameContainer"></div>
 
     <div id="idCustomItemContainer"></div>
